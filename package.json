@@ -1,0 +1,22 @@
+{
+  "name": "dragonbackend",
+  "version": "1.0.0",
+  "description": "Backend application for dragon robot.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiritnarain/dragonbackend.git"
+  },
+  "author": "Kirit Narain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiritnarain/dragonbackend/issues"
+  },
+  "homepage": "https://github.com/kiritnarain/dragonbackend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

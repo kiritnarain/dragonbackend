@@ -5,7 +5,7 @@ console.log('Dragonbackend initializing');
 
 var dragonIP = "0.0.0.0";
 
-app.get('/sync', (req, res) => {
+app.get('/?sync', (req, res) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     dragonIP = ip;
     res.send(`Dragon Backend Running! (captured ip: ${ip})`)

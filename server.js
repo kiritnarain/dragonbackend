@@ -15,7 +15,7 @@ app.get('//sync', (req, res) => {
 });
 
 app.get('//getIP', (req, res) => {
-   res.send(dragonIP="");
+   res.send(dragonIP);
 });
 
 

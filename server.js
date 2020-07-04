@@ -12,6 +12,7 @@ app.get('//sync', (req, res) => {
     dragonIP = ip+':'+DRAGON_PORT;
     console.log(`Synced with IP: ${dragonIP}`);
     res.send(`Dragon Backend Running! (captured ip: ${dragonIP})`)
+    res.send('New Data Packet');
 });
 
 app.get('//getIP', (req, res) => {

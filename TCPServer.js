@@ -23,6 +23,10 @@ server.on('connection', function(socket) {
     // the client by writing to its socket.
     socket.write('Hello, client.');
 
+    setTimeout(() => {
+        socket.write('PING');
+    }, 3000);
+
     // The server can also receive data from the client by reading from its socket.
     socket.on('data', function(chunk) {
         console.log(`Data received from client: ${chunk.toString()}`);

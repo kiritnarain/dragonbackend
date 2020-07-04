@@ -7,3 +7,6 @@ Runs 2 servers. HTTP Server (built with Express) on port 5090 and a TCP server o
 The HTTP Server supports 2 requests
 /move?dirDeg=[360 degree direction]&speed=[value from 0 to 1024]
 /stop
+
+The TCPServer communicates via JSON. Basic structure: {'action': ..., ...}
+The currently supporting actions: sync, stop and move (supply fields dirDeg and speed in JSON).

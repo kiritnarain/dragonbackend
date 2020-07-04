@@ -28,6 +28,7 @@ module.exports = class TCPServer{
                 console.log(`Data received from client: ${chunk.toString()}`);
                 var data = JSON.parse(chunk.toString());
                 if(data['action']==='sync'){
+                    console.log('Sync successful');
                     this.DragonSocket = socket;
                 }
 

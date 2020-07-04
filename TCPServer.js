@@ -1,6 +1,7 @@
 //Acknowledgment: https://riptutorial.com/node-js/example/22405/a-simple-tcp-server
+'use strict';
 const Net = require('net');
-class TCPServer{
+module.exports = class TCPServer{
     constructor(port) {
         this.DragonSocket = null;
         const server = new Net.Server();

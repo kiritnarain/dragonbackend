@@ -1,5 +1,5 @@
 const express = require('express');
-const TCPServer = require('TCPServer');
+const TCPServer = require('./TCPServer');
 const app = express();
 const HTTPServerPort = 5090;
 const TCPServerPort = 5091;
@@ -28,5 +28,5 @@ app.get('/stop', (req, res) => {
 
 
 app.listen(HTTPServerPort, () => {
-    console.log(`Dragonbackend listening at http://localhost:${port}`)
+    console.log(`Dragonbackend listening at http://localhost:${HTTPServerPort}`)
 });

@@ -2,7 +2,7 @@
 const Net = require('net');
 module.exports = class TCPServer{
 
-    constructor(port) {
+    constructor(port){
         this.DragonSocket = null;
         const server = new Net.Server();
 
@@ -10,7 +10,7 @@ module.exports = class TCPServer{
             console.log(`Server listening for connection requests on socket localhost:${port}`);
         });
 
-        server.on('connection', function(socket) {
+        server.on('connection', (socket) => {
             console.log('A new connection has been established.');
             var isConnected = true;
 

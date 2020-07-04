@@ -41,10 +41,12 @@ module.exports = class TCPServer{
                 if(socket===this.DragonSocket){
                     this.DragonSocket = null;
                 }
+                clearInterval(statusCheck);
             });
 
             socket.on('error', function(err) {
                 console.log(`Error: ${err}`);
+                clearInterval(statusCheck);
             });
         });
     }

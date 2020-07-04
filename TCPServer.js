@@ -18,13 +18,18 @@ server.listen(port, function() {
 // socket dedicated to that client.
 server.on('connection', function(socket) {
     console.log('A new connection has been established.');
+    var isConnected = true;
 
     // Now that a TCP connection has been established, the server can send data to
     // the client by writing to its socket.
     socket.write('Hello, client.');
 
     var statusCheck = setInterval(() => {
-        socket.write('PING');
+        if(isConnected){
+            socket.write('PING');
+        }else{
+            clearInterval(statusCheck)
+        }
     }, 3000);
 
     // The server can also receive data from the client by reading from its socket.
@@ -36,6 +41,7 @@ server.on('connection', function(socket) {
     // ends the connection.
     socket.on('end', function() {
         console.log('Closing connection with the client');
+        isConnected = false;
     });
 
     // Don't forget to catch error, for your own sake.

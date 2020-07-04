@@ -16,7 +16,7 @@ app.get('/move', (req, res) => {
     moveObj.action = "move";
     moveObj.dirDeg = dirDeg;
     moveObj.speed  = speed;
-    var jsonString= JSON.stringify(moveObj);
+    var jsonString = JSON.stringify(moveObj);
     tcpServer.sendMessage(jsonString);
     console.log(`server.js: got move request. dirDeg: ${dirDeg} and speed: ${speed}`);
 });

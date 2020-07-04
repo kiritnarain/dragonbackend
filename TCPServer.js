@@ -49,7 +49,7 @@ module.exports = class TCPServer{
         });
     }
 
-    sendMessage = (message) => {
+    sendMessage(message){
         console.log(`TCPServer.js: Sending message `+message);
         if(this.DragonSocket!=null){
             console.log('Sent message');

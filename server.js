@@ -1,25 +1,32 @@
 const express = require('express');
+const TCPServer = require('TCPServer');
 const app = express();
-const port = 5091;
+const HTTPServerPort = 5090;
+const TCPServerPort = 5091;
+//const DRAGON_PORT = 1080;
 console.log('Dragonbackend initializing');
 
-const DRAGON_PORT = 1080;
-var dragonIP = "0.0.0.0";
+var tcpServer = new TCPServer(TCPServerPort);
 
-
-app.get('//sync', (req, res) => {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    dragonIP = ip+':'+DRAGON_PORT;
-    console.log(`Synced with IP: ${dragonIP}`);
-    res.send(`Dragon Backend Running! (captured ip: ${dragonIP})`)
-    res.send('New Data Packet');
+app.get('/move', (req, res) => {
+    const dirDeg = req.query.dirDeg;
+    const speed = req.query.speed;
+    var moveObj = new Object();
+    moveObj.action = "move";
+    moveObj.dirDeg = dirDeg;
+    moveObj.speed  = speed;
+    var jsonString= JSON.stringify(moveObj);
+    tcpServer.sendMessage(jsonString)
 });
 
-app.get('//getIP', (req, res) => {
-   res.send(dragonIP);
+app.get('/stop', (req, res) => {
+    var stopObj = new Object();
+    stopObj.action = "stop";
+    var jsonString= JSON.stringify(stopObj);
+    tcpServer.sendMessage(jsonString)
 });
 
 
-app.listen(port, () => {
+app.listen(HTTPServerPort, () => {
     console.log(`Dragonbackend listening at http://localhost:${port}`)
 });

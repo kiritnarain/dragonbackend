@@ -1,10 +1,9 @@
 # dragonbackend
-Express backend for Dragon Robot  
+NodeJS backend for controlling Dragon Robot
 Install: npm install  
-Start using: node server.js  
-Runs on port 5091  
-Default Dragon Robot Port: 1080  
+Start using: node server.js
+Runs 2 servers. HTTP Server (built with Express) on port 5090 and a TCP server on port 5091.
 
-Supports 2 HTTP Get requests  
-/sync : captures IP address  
-/getIP : returns last captured IP address
+The HTTP Server supports 2 requests
+/move?dirDeg=[360 degree direction]&speed=[value from 0 to 1024]
+/stop

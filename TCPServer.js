@@ -23,8 +23,13 @@ server.on('connection', function(socket) {
     // the client by writing to its socket.
     socket.write('Hello, client.');
 
-    setInterval(() => {
-        socket.write('PING');
+    var statusCheck = setInterval(() => {
+        if(socket.connected){
+            socket.write('PING');
+        }else{
+            clearInterval(statusCheck);
+        }
+
     }, 3000);
 
     // The server can also receive data from the client by reading from its socket.

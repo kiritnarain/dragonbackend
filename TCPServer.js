@@ -23,7 +23,7 @@ server.on('connection', function(socket) {
     // the client by writing to its socket.
     socket.write('Hello, client.');
 
-    setTimeout(() => {
+    setInterval(() => {
         socket.write('PING');
     }, 3000);
 

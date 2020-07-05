@@ -1,12 +1,15 @@
 const express = require('express');
 const TCPServer = require('./TCPServer');
 const app = express();
+var cors = require('cors');
 const HTTPServerPort = 5090;
 const TCPServerPort = 5091;
 //const DRAGON_PORT = 1080;
 console.log('Dragonbackend initializing');
 
 var tcpServer = new TCPServer(TCPServerPort);
+app.use(cors());
+
 
 app.get('/move', (req, res) => {
 

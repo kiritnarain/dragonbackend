@@ -66,10 +66,10 @@ module.exports = class TCPServer{
     getStatus(){
         var status = new Object();
         if(this.DragonSocket!=null){
-            status.isConnected = "true";
+            status.isConnected = true;
             status.wifiSSID = this.wifiSSID;
         }else{
-            status.isConnected = "false";
+            status.isConnected = false;
             status.wifiSSID = "";
         }
         var jsonString= JSON.stringify(status);

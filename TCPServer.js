@@ -22,7 +22,7 @@ module.exports = class TCPServer{
             var statusCheck = setInterval(() => {
                 if(isConnected){
                     socket.write('{"action": "ping"}');
-                    if(socket===this.DragonSocket && Date.now()-this.lastSync>10000){
+                    if(socket===this.DragonSocket && Date.now()-this.lastSync>7000){
                         this.DragonSocket = null;
                     }
                 }else{

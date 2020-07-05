@@ -4,6 +4,7 @@ module.exports = class TCPServer{
 
     constructor(port){
         this.DragonSocket = null;
+        this.wifiSSID = "";
         const server = new Net.Server();
 
         server.listen(port, function() {
@@ -30,6 +31,7 @@ module.exports = class TCPServer{
                 if(data['action']==='sync'){
                     console.log('Sync successful');
                     this.DragonSocket = socket;
+                    this.wifiSSID = data['ssid'];
                 }
 
             });
@@ -59,6 +61,19 @@ module.exports = class TCPServer{
         }else{
             console.log('DragonSocket is null');
         }
+    }
+
+    getStatus(){
+        var status = new Object();
+        if(this.DragonSocket!=null){
+            status.isConnected = "true";
+            status.wifiSSID = this.wifiSSID;
+        }else{
+            status.isConnected = "false";
+            status.wifiSSID = "";
+        }
+        var jsonString= JSON.stringify(status);
+        return jsonString;
     }
 
 };

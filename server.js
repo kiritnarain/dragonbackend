@@ -31,6 +31,11 @@ app.get('/stop', (req, res) => {
     res.send('Issued stop command');
 });
 
+app.get('/status', (req, res) => {
+    var jsonResponse = tcpServer.getStatus();
+    res.send(jsonResponse);
+});
+
 
 app.listen(HTTPServerPort, () => {
     console.log(`Dragonbackend listening at http://localhost:${HTTPServerPort}`)

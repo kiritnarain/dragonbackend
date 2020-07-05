@@ -5,6 +5,8 @@ module.exports = class TCPServer{
     constructor(port){
         this.DragonSocket = null;
         this.wifiSSID = "";
+        this.lastSync = 0;
+
         const server = new Net.Server();
 
         server.listen(port, function() {
@@ -20,6 +22,9 @@ module.exports = class TCPServer{
             var statusCheck = setInterval(() => {
                 if(isConnected){
                     socket.write('{"action": "ping"}');
+                    if(socket===this.DragonSocket && Date.now()-this.lastSync>10000){
+                        this.DragonSocket = null;
+                    }
                 }else{
                     clearInterval(statusCheck)
                 }
@@ -32,6 +37,8 @@ module.exports = class TCPServer{
                     console.log('Sync successful');
                     this.DragonSocket = socket;
                     this.wifiSSID = data['ssid'];
+                    this.lastSync = Date.now();
+
                 }
 
             });

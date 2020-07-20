@@ -3,10 +3,11 @@ const Net = require('net');
 const TIMEOUT_MILI = 3500;
 
 module.exports = class TCPServer{
-    ACTION_STOP = "stop"; //JSON stop action
-    ACTION_MOVE = "move"; //JSON move action
+    
 
     constructor(port){
+        this.ACTION_STOP = "stop"; //JSON stop action
+        this.ACTION_MOVE = "move"; //JSON move action
         this.DragonSocket = null;
         this.wifiSSID = "";
         this.lastSync = 0;

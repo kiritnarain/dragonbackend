@@ -11,3 +11,5 @@ The HTTP Server supports 3 requests
 
 The TCPServer communicates via JSON. Basic structure: {'action': ..., ...}
 The currently supporting actions: sync, stop and move (supply fields dirDeg and speed in JSON).
+TCPServer sends a ping request to connected clients every 1 second which includes the last action for syncing purposes.
+A typical ping request looks like {"action": "ping", "lastAction": "stop"}

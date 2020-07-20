@@ -1,11 +1,16 @@
 //Acknowledgment: https://riptutorial.com/node-js/example/22405/a-simple-tcp-server
 const Net = require('net');
+const TIMEOUT_MILI = 3500;
+
 module.exports = class TCPServer{
+    ACTION_STOP = "stop"; //JSON stop action
+    ACTION_MOVE = "move"; //JSON move action
 
     constructor(port){
         this.DragonSocket = null;
         this.wifiSSID = "";
         this.lastSync = 0;
+        this.lastAction = this.ACTION_STOP;
 
         const server = new Net.Server();
 
@@ -17,18 +22,19 @@ module.exports = class TCPServer{
             console.log('A new connection has been established.');
             var isConnected = true;
 
-            socket.write('{"action": "stop"}');
+            socket.write('{"action": "'+this.ACTION_STOP+'"}');
 
             var statusCheck = setInterval(() => {
                 if(isConnected){
-                    socket.write('{"action": "ping"}');
-                    if(socket===this.DragonSocket && Date.now()-this.lastSync>7000){
+                    socket.write('{"action": "ping", "lastAction": "'+this.lastAction+'"}');
+                    if(socket===this.DragonSocket && Date.now()-this.lastSync>TIMEOUT_MILI){
                         this.DragonSocket = null;
+                        this.lastAction = this.ACTION_STOP;
                     }
                 }else{
                     clearInterval(statusCheck)
                 }
-            }, 3000);
+            }, 1000);
 
             socket.on('data', (chunk) => {
                 console.log(`Data received from client: ${chunk.toString()}`);
@@ -60,8 +66,14 @@ module.exports = class TCPServer{
         });
     }
 
-    sendMessage(message){
+    /**
+     * Send JSON message to connected clients
+     * @param message JSON message of the form {"action": ..., "param1": "arg1", ...}
+     * @param actionStr Either ACTION_STOP or ACTION_MOVE
+     */
+    sendMessage(message, actionStr){
         console.log(`TCPServer.js: Sending message `+message);
+        this.lastAction = actionStr;
         if(this.DragonSocket!=null){
             console.log('Sent message');
             this.DragonSocket.write(message);

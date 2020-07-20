@@ -20,7 +20,7 @@ app.get('/move', (req, res) => {
     moveObj.dirDeg = dirDeg;
     moveObj.speed  = speed;
     var jsonString = JSON.stringify(moveObj);
-    tcpServer.sendMessage(jsonString);
+    tcpServer.sendMessage(jsonString, tcpServer.ACTION_MOVE);
     console.log(`server.js: got move request. dirDeg: ${dirDeg} and speed: ${speed}`);
     res.send('Issued move command');
 });
@@ -29,7 +29,7 @@ app.get('/stop', (req, res) => {
     var stopObj = new Object();
     stopObj.action = "stop";
     var jsonString= JSON.stringify(stopObj);
-    tcpServer.sendMessage(jsonString);
+    tcpServer.sendMessage(jsonString, tcpServer.ACTION_STOP);
     console.log(`server.js: got stop request.`);
     res.send('Issued stop command');
 });

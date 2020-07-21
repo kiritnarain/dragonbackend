@@ -34,6 +34,15 @@ app.get('/stop', (req, res) => {
     res.send('Issued stop command');
 });
 
+app.get('/resetwifi', (req, res) => {
+   var resetObj = new Object();
+   resetObj.action = "resetwifi";
+    var jsonString= JSON.stringify(resetObj);
+    tcpServer.sendMessage(jsonString, tcpServer.ACTION_STOP);
+    console.log(`server.js: got wifi reset request.`);
+    res.send('Issued wifi reset command');
+});
+
 app.get('/status', (req, res) => {
     var jsonResponse = tcpServer.getStatus();
     res.send(jsonResponse);

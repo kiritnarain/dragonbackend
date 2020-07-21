@@ -39,15 +39,18 @@ module.exports = class TCPServer{
 
             socket.on('data', (chunk) => {
                 console.log(`Data received from client: ${chunk.toString()}`);
-                var data = JSON.parse(chunk.toString());
-                if(data['action']==='sync'){
-                    console.log('Sync successful');
-                    this.DragonSocket = socket;
-                    this.wifiSSID = data['ssid'];
-                    this.lastSync = Date.now();
+                try{
+                    var data = JSON.parse(chunk.toString());
+                    if(data['action']==='sync'){
+                        console.log('Sync successful');
+                        this.DragonSocket = socket;
+                        this.wifiSSID = data['ssid'];
+                        this.lastSync = Date.now();
 
+                    }
+                }catch (e) {
+                    console.log(e.message)
                 }
-
             });
 
 
